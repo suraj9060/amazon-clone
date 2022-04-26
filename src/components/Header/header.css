@@ -94,6 +94,10 @@
    font-weight: bold;
 }
 
+.header__bottom ul li a{
+    color: #fff;
+    text-decoration: none;
+}
 
 
 

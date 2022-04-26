@@ -4,16 +4,35 @@ import { BrowserRouter, Switch , Route } from "react-router-dom"
 import MYCart from "./components/Cart/Cart";
 import commerce from './lib/commerce.js';
 import { useEffect, useState } from 'react';
+import Checkout from './components/checkoutPage/checkout';
+import ThankYou from './components/ThankYouPage/ThankYou';
 
 function App() {
 
   const [productsList, setProductsList] = useState([])
-  const [cart , setCart] = useState([])
+  const [productByCategory , setProductByCategory] = useState([])
+  const [cart, setCart] = useState([])
+  const [categoryList , setCategoryList] = useState([])
  
   const fetchProduct = async () => {
     const response = await commerce.products.list();
     setProductsList(response.data)
     console.log(response)
+  }
+
+    const fetchProductByCategory = async (category) => {
+      const response = await commerce.products.list({
+        category_slug:[category]
+      })
+     setProductByCategory(response.data)
+    };
+  
+
+
+  const fetchCategories = async (prodId) => {
+    const response = await commerce.categories.list()
+    console.log(response);
+    setCategoryList(response.data)
   }
 
 
@@ -22,7 +41,7 @@ function App() {
     const response = await commerce.cart.add(prodId, qty);
 
     setCart(response.cart)
-    console.log(response)
+    
   }
 
   const fetchCart = async (prodId, qty) => {
@@ -38,12 +57,13 @@ function App() {
   useEffect(() => {
     fetchProduct();
     fetchCart();
+    fetchCategories()
   },[])
   
 
   return (
     <div className="App">
-      <Header cart={cart} />
+      <Header cart={cart} categoryList={categoryList} />
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
@@ -57,6 +77,21 @@ function App() {
           </Route>
           <Route exact path="/cart">
             <MYCart cart={cart} removeFromCart={removeFromCart} />
+          </Route>
+          <Route exact path="/category/:slug">
+            <div style={{ marginBottom: "320px" }}> </div>
+            <Product
+              productsList={productByCategory}
+              fetchProductByCategory={fetchProductByCategory}
+              addToCart={addToCart}
+            />
+          </Route>
+          <Route exact path="/checkout">
+            <Checkout />
+          </Route>
+
+          <Route exact path="/thankyou">
+            <ThankYou />
           </Route>
         </Switch>
       </BrowserRouter>

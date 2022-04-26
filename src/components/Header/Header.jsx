@@ -1,11 +1,12 @@
 import React from 'react'
+import {Link} from "react-router-dom"
 import "./header.css"
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 
 
-const Header = ({ cart }) => {
+const Header = ({ cart, categoryList }) => {
   return (
     <>
       <div className="header">
@@ -47,13 +48,17 @@ const Header = ({ cart }) => {
 
       <div className="header__bottom">
         <ul>
-          <li>all</li>
-          <li>Mobile</li>
-          <li>Category</li>
-          <li>computer</li>
-          <li>Cloths</li>
-          <li>Shoes</li>
-          <li>Electronic</li>
+          {
+            categoryList.map(category => {
+              return (
+                <li key={category.id}>
+                  <a href={`/category/${category.slug}`}>{category.name}</a>
+                </li>
+              );
+              
+            })
+          }
+        
           <li>
             <img
               src="https://images-eu.ssl-images-amazon.com/images/G/31/AmazonVideo/2021/X-site/SingleTitle/BachanPandey/400x39-SWM_179._CB623270002_.jpg"

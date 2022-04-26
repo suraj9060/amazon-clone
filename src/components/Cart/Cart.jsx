@@ -1,7 +1,9 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import "./cart.css"
 
 const MYCart = ({ cart, removeFromCart }) => {
+  const history = useHistory()
   return (
     <div className="checkout">
       <div className="checkout__left">
@@ -48,7 +50,7 @@ const MYCart = ({ cart, removeFromCart }) => {
             <input type="checkbox" /> This Order Contains a gift
           </small>
         </div>
-        <button >Proceed to check out</button>
+        <button onClick={()=>history.push("/checkout")} >Proceed to check out</button>
       </div>
     </div>
   );

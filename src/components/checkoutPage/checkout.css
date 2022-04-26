@@ -1,0 +1,45 @@
+.checkout_wrap .checkout_colum input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+.checkout_wrap{
+    max-width: 600px;
+    margin: 0px 20px;
+    margin-top: 30px;
+}
+.checkout_form{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.checkout_colum{
+    margin-bottom: 20px;
+    margin-right: 20px;
+
+}
+
+.checkout_colum label{
+    display: block;
+}
+.checkout_colum input{
+    width: 100%;
+}
+
+.checkout_colum select{
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    padding: 10px 0px;
+}
+
+.checkout_colum button{
+    background-color: #f0c14b;
+    border-radius: 5px;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    padding: 10px 0px;
+}
